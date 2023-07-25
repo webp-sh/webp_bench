@@ -16,7 +16,7 @@ chmod +x curl.sh
 
 ## Build Start WebP Server Go
 cd ../webp_server_go && git checkout $version && make && cd ../webp_bench && cp ../webp_server_go/builds/webp-server-linux-amd64 ./
-LD_PRLOAD=/usr/lib64/libjemalloc.so.2 ./webp-server-linux-amd64 &
+LD_PRLOAD=/usr/lib/x86_64-linux-gnu/libjemalloc.so.2 ./webp-server-linux-amd64 &
 
 # Step 2: Find the PID of the server process
 server_pid=$(ps -aux | grep "webp-server-linux-amd64" | grep -v grep | awk '{print $2}')
@@ -27,6 +27,10 @@ if [ -n "$server_pid" ]; then
     psrecord $server_pid --plot "./benchmark/$version.png" &
     # Execute the curl script
     ./curl.sh
+    # Get server_pid RAM usage and running time
+    # 0.9.0 1200 2:01
+    # version RAM(MB) Time(MM:SS)
+    echo "$version $(($(ps -p $server_pid -o rss=) / 1024)) $(ps -p $server_pid -o etime=)" >> ./benchmark/data.txt
 else
     echo "Server process not found."
 fi

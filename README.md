@@ -4,10 +4,10 @@ This is a helper repo that tests different versions of WebP Server Go's performa
 
 ## Prepare
 
-Install requirements
+Install requirements, since this test is done with `jemalloc`, you need to install it first.
 
 ```bash
-apt install libvips-dev -y
+apt install libvips-dev libjemalloc2 -y
 pip3 install psrecord
 ```
 
@@ -34,6 +34,10 @@ unzip imgur_VCnYv.zip && rm -f imgur_VCnYv.zip
 
 Now it's ready to bench, make sure you `cd` back inside `webp_bench` directory.
 
+> If you're not using Ubuntu 22.04 for testing, make sure to change line 19 of `bench.sh` as jemalloc's path may be different.
+>
+> For example, in fedora it's `/usr/lib64/libjemalloc.so.2`
+
 ## Test on single version
 
 For example you want to test on 0.8.0
@@ -45,6 +49,14 @@ For example you want to test on 0.8.0
 Example output at `benchmark/0.8.0.png`
 
 ![](./benchmark/0.8.0.png)
+
+Example output at `benchmark/data.txt`
+
+```
+0.8.0 709       00:49
+```
+
+> version RAM(MB) Time(MM:SS)
 
 
 ## Test on all versions
