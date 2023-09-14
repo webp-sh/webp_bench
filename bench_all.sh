@@ -7,8 +7,8 @@ for i in {0..4}; do
     VERSIONS+=("$version")
 done
 
-# 0.9.0 ~ 0.9.8
-for i in {0..8}; do
+# 0.9.0 ~ 0.9.10
+for i in {0..10}; do
     version="0.9.$i"
     VERSIONS+=("$version")
 done

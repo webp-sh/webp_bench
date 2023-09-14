@@ -11,7 +11,7 @@ fi
 ## Prepare env
 rm -rf exhaust metadata remote-raw
 mkdir -p benchmark
-find ./pics -type f -exec basename {} \; | xargs -I {} echo "curl -s -H 'User-Agent: Mozilla/5.0 (X11; Fedora; Linux x86_64; rv:98.0) Gecko/20100101 Firefox/98.0' http://localhost:3333/{}" > curl.sh
+find ./pics -type f -exec basename {} \; | xargs -I {} echo "curl -s -H 'Accept: image/webp' http://localhost:3333/{}" > curl.sh
 chmod +x curl.sh
 
 ## Build Start WebP Server Go
